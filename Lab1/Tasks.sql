@@ -4,7 +4,7 @@ create table Tasks (
   	deadline DATE NOT NULL,
   	status VARCHAR(11) NOT NULL,
 	project_id INT NOT NULL,
-  	FOREIGN KEY (project_id) REFERENCES Projects (id)
+  	FOREIGN KEY (project_id) REFERENCES Projects (id) ON DELETE CASCADE
 );
 insert into Tasks (id, description, deadline, status, project_id) values (1, 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', '20/09/2023', 'failed', 9);
 insert into Tasks (id, description, deadline, status, project_id) values (2, 'In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', '28/11/2023', 'cancelled', 1);

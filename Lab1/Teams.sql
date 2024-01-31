@@ -2,7 +2,7 @@ create table Teams (
 	id SERIAL NOT NULL PRIMARY KEY,
 	name VARCHAR(13) NOT NULL,
 	project_id INT NOT NULL,
-	FOREIGN KEY (project_id) REFERENCES Projects (id) 
+	FOREIGN KEY (project_id) REFERENCES Projects (id) ON DELETE CASCADE
 );
 insert into Teams (id, name, project_id) values (1, 'Lions', 9);
 insert into Teams (id, name, project_id) values (2, 'Storm', 5);

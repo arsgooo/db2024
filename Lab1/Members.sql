@@ -4,7 +4,7 @@ create table Members (
 	role VARCHAR(18) NOT NULL,
 	phone_number VARCHAR(50) NOT NULL,
 	team_id INT NOT NULL,
-	FOREIGN KEY (team_id) REFERENCES Teams (id)
+	FOREIGN KEY (team_id) REFERENCES Teams (id) ON DELETE CASCADE
 );
 insert into Members (id, name, role, phone_number, team_id) values (1, 'Elizabet Lowndesbrough', 'support specialist', '+48 (936) 681-1279', 11);
 insert into Members (id, name, role, phone_number, team_id) values (2, 'Evered Rankling', 'quality assurance', '+63 (672) 202-9444', 31);
