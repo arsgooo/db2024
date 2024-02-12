@@ -4,7 +4,7 @@ create table Projects (
 	description TEXT NOT NULL,
 	start_date DATE NOT NULL,
 	status VARCHAR(12) NOT NULL,
-	budget VARCHAR(50) NOT NULL
+	budget MONEY NOT NULL
 );
 insert into Projects (id, name, description, start_date, status, budget) values (1, 'Aqua', 'Donec semper sapien a libero.', '03/04/2023', 'on hold', '$8812.87');
 insert into Projects (id, name, description, start_date, status, budget) values (2, 'Serenity', 'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit.', '12/02/2023', 'delayed', '$14533.30');

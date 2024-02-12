@@ -31,7 +31,7 @@ SELECT * FROM Projects WHERE status != 'archived';
 SELECT * FROM Projects WHERE start_date < '2023-04-01' OR budget < '$10000';
 
 -- 10. Підрахувати загальний бюджет всіх проєктів:
-SELECT SUM(CAST(SUBSTRING(budget, 2) AS DECIMAL)) FROM Projects;
+SELECT SUM(budget) FROM Projects;
 
 -- 11. Вивести проєкти, назви яких закінчуються на літеру 'y':
 SELECT * FROM Projects WHERE name LIKE '%y';
@@ -43,13 +43,13 @@ SELECT * FROM Projects WHERE status IN ('in progress', 'approved');
 SELECT * FROM Projects WHERE EXTRACT(MONTH FROM start_date) = 11 AND EXTRACT(YEAR FROM start_date) = 2023;
 
 -- 14. Отримати проєкти, які мають бюджети в діапазоні від $10000 до $30000:
-SELECT * FROM Projects WHERE CAST(SUBSTRING(budget, 2) AS DECIMAL) BETWEEN 10000 AND 30000;
+SELECT * FROM Projects WHERE budget::DECIMAL BETWEEN 10000 AND 30000;
 
 -- 15. Вибрати проєкти, які мають назви коротше 6 символів:
 SELECT * FROM Projects WHERE LENGTH(name) < 6;
 
 -- 16. Отримати список проєктів в порядку спадання бюджету:
-SELECT * FROM Projects ORDER BY CAST(SUBSTRING(budget, 2) AS DECIMAL) DESC;
+SELECT * FROM Projects ORDER BY budget DESC;
 
 -- 17. Вивести проєкти, які мають статус 'delayed' та мають слова 'justo' або 'erat' у описі:
 SELECT * FROM Projects WHERE status = 'delayed' AND (description LIKE '%justo%' OR description LIKE '%erat%');
@@ -58,7 +58,7 @@ SELECT * FROM Projects WHERE status = 'delayed' AND (description LIKE '%justo%' 
 SELECT * FROM Projects WHERE status LIKE 'a%';
 
 -- 19. Вибрати проєкти, які мають статус 'cancelled' та мають бюджет менше $10,000:
-SELECT * FROM Projects WHERE status = 'cancelled' AND CAST(SUBSTRING(budget, 2) AS DECIMAL) < 10000;
+SELECT * FROM Projects WHERE status = 'cancelled' AND budget::DECIMAL < 10000;
 
 -- 20. Отримати назви та описи проєктів, які мають статус 'in progress':
 SELECT name, description FROM Projects WHERE status = 'in progress';
@@ -70,7 +70,7 @@ SELECT name, budget FROM Projects WHERE description LIKE '%rutrum%' OR descripti
 SELECT * FROM Projects WHERE status = 'on hold' AND description NOT LIKE '%justo%';
 
 -- 23. Отримати проєкти, які мають бюджет менше $80000 та починаються з літери 'S':
-SELECT * FROM Projects WHERE CAST(SUBSTRING(budget, 2) AS DECIMAL) < 80000 AND name LIKE 'S%';
+SELECT * FROM Projects WHERE budget::DECIMAL < 80000 AND name LIKE 'S%';
 
 -- 24. Вивести проєкти, які мають статус 'rejected' і дату початку після 1 квітня 2023 року:
 SELECT * FROM Projects WHERE status = 'rejected' AND start_date > '2023-04-01';
@@ -210,7 +210,7 @@ GROUP BY t.name
 ORDER BY team_name;
 
 -- 56. Отримати середню кількість учасників у команді:
-SELECT AVG(member_count) AS avg_member_count
+SELECT ROUND(AVG(member_count), 2) AS avg_member_count
 FROM (
     SELECT COUNT(*) AS member_count
     FROM Members
@@ -255,7 +255,7 @@ JOIN Projects p ON t.project_id = p.id
 WHERE p.description LIKE '%libero%';
 
 -- 63. Отримати список команд та середній бюджет їх проєктів:
-SELECT t.name AS team_name, AVG(CAST(SUBSTRING(p.budget, 2) AS DECIMAL)) AS avg_budget
+SELECT t.name AS team_name, ROUND(AVG(p.budget::DECIMAL), 2) AS avg_budget
 FROM Teams t
 JOIN Projects p ON t.project_id = p.id
 GROUP BY t.name;
@@ -271,15 +271,15 @@ FROM
 JOIN 
     Projects p ON t.project_id = p.id
 JOIN
-    (SELECT AVG(CAST(SUBSTRING(budget, 2) AS DECIMAL)) AS avg_budget FROM Projects) AS avg_budget ON TRUE
+    (SELECT ROUND(AVG(budget::DECIMAL), 2) AS avg_budget FROM Projects) AS avg_budget ON TRUE
 WHERE 
-    CAST(SUBSTRING(p.budget, 2) AS DECIMAL) > avg_budget.avg_budget;
+    p.budget::DECIMAL > avg_budget.avg_budget;
 
 -- 65. Отримати список команд, які працюють над проєктами з бюджетом, що не перевищує $60000 та мають статус 'in progress':
 SELECT t.name AS team_name, p.name AS project_name
 FROM Teams t
 JOIN Projects p ON t.project_id = p.id
-WHERE CAST(SUBSTRING(p.budget, 2) AS DECIMAL) < 60000 AND p.status = 'in progress';
+WHERE p.budget::DECIMAL < 60000 AND p.status = 'in progress';
 
 -- 66. Отримати список команд, які працюють над проєктами, які мають більше 2 учасників та статус 'approved':
 SELECT t.name AS team_name, p.name AS project_name, COUNT(*) AS member_count
@@ -312,8 +312,8 @@ WHERE LENGTH(p.name) < 6;
 SELECT t.name AS team_name, p.name AS project_name, p.budget AS project_budget
 FROM Teams t
 JOIN Projects p ON t.project_id = p.id
-WHERE CAST(SUBSTRING(p.budget, 2) AS DECIMAL) BETWEEN 50000 AND 70000
-ORDER BY CAST(SUBSTRING(p.budget, 2) AS DECIMAL);
+WHERE p.budget::DECIMAL BETWEEN 50000 AND 70000
+ORDER BY p.budget::DECIMAL;
 
 -- 71. Отримати імена учасників та назви їхніх команд:
 SELECT m.name AS member_name, t.name AS team_name
@@ -406,7 +406,7 @@ GROUP BY p.name;
 SELECT t.*
 FROM Tasks t
 JOIN Projects p ON t.project_id = p.id
-WHERE CAST(SUBSTRING(p.budget, 2) AS DECIMAL) > 60000;
+WHERE p.budget::DECIMAL > 60000;
 
 -- 86. Отримати список проєктів за кількістю завдань в порядку спадання:
 SELECT p.name AS project_name, COUNT(*) AS task_count
@@ -438,12 +438,12 @@ FROM Tasks t
 JOIN Teams tm ON t.project_id = tm.project_id
 GROUP BY tm.name;
 
--- 91. Отримати список проєктів, в яких є завдання зі статусом "completed", та їх бюджет більше $50000:
+-- 91. Отримати список проєктів, в яких є завдання зі статусом 'completed', та їх бюджет більше $50000:
 SELECT DISTINCT p.name AS project_name, p.budget AS project_budget
 FROM Tasks t
 JOIN Projects p ON t.project_id = p.id
 WHERE t.status = 'completed'
-  AND CAST(SUBSTRING(p.budget, 2) AS DECIMAL) > 50000;
+AND p.budget::DECIMAL > 50000;
 
 -- 92. Отримати список учасників та їхніх команд, які мають завдання зі статусом 'failed':
 SELECT m.name AS member_name, tm.name AS team_name
@@ -452,7 +452,7 @@ JOIN Teams tm ON m.team_id = tm.id
 JOIN Tasks t ON tm.project_id = t.project_id
 WHERE t.status = 'failed';
 
--- 93. Знайти кількість завдань у кожному проєкті, де є хоча б одне завдання зі статусом 'cancelled':
+-- 93. Отримати кількість завдань у кожному проєкті, де є хоча б одне завдання зі статусом 'cancelled':
 SELECT p.name AS project_name, COUNT(t.id) AS task_count
 FROM Projects p
 JOIN Tasks t ON p.id = t.project_id
@@ -494,8 +494,8 @@ SELECT tm.name AS team_name, COUNT(t.id) AS task_count
 FROM Teams tm
 JOIN Projects p ON tm.project_id = p.id
 JOIN Tasks t ON p.id = t.project_id
-WHERE CAST(SUBSTRING(p.budget, 2) AS DECIMAL) < (
-    SELECT AVG(CAST(SUBSTRING(budget, 2) AS DECIMAL))
+WHERE p.budget::DECIMAL < (
+    SELECT ROUND(AVG(budget::DECIMAL), 2)
     FROM Projects
 )
 GROUP BY tm.name;

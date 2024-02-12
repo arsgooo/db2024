@@ -2,7 +2,7 @@ create table Members (
 	id SERIAL NOT NULL PRIMARY KEY,
 	name VARCHAR(50) NOT NULL,
 	role VARCHAR(18) NOT NULL,
-	phone_number VARCHAR(50) NOT NULL,
+	phone_number TEXT NOT NULL,
 	team_id INT NOT NULL,
 	FOREIGN KEY (team_id) REFERENCES Teams (id) ON DELETE CASCADE
 );
