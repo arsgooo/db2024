@@ -1,0 +1,35 @@
+{
+  "name": "lab4",
+  "version": "1.0.0",
+  "description": "mean stack crud webapp",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arsgooo/db2024.git"
+  },
+  "keywords": [
+    "mean",
+    "mongodb",
+    "express",
+    "angular",
+    "node"
+  ],
+  "author": "Ars arseniistudy13@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arsgooo/db2024/issues"
+  },
+  "homepage": "https://github.com/arsgooo/db2024#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "http-status-code": "^2.1.0",
+    "http-status-codes": "^2.3.0",
+    "mongoose": "^8.3.2"
+  }
+}

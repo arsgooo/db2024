@@ -1,0 +1,128 @@
+[{
+  "name": "The Beatles",
+  "year_formed": 1960,
+  "country": "United Kingdom",
+  "popular_song": "Hey Jude",
+  "genre": "Rock",
+  "youngest_member_age": 17
+},
+{
+  "name": "Queen",
+  "year_formed": 1970,
+  "country": "United Kingdom",
+  "popular_song": "Bohemian Rhapsody",
+  "genre": "Rock",
+  "youngest_member_age": 19
+},
+{
+  "name": "Led Zeppelin",
+  "year_formed": 1968,
+  "country": "United Kingdom",
+  "popular_song": "Stairway to Heaven",
+  "genre": "Rock",
+  "youngest_member_age": 20
+},
+{
+  "name": "The Rolling Stones",
+  "year_formed": 1962,
+  "country": "United Kingdom",
+  "popular_song": "Paint It Black",
+  "genre": "Rock",
+  "youngest_member_age": 18
+},
+{
+  "name": "Pink Floyd",
+  "year_formed": 1965,
+  "country": "United Kingdom",
+  "popular_song": "Comfortably Numb",
+  "genre": "Rock",
+  "youngest_member_age": 21
+},
+{
+  "name": "AC/DC",
+  "year_formed": 1973,
+  "country": "Australia",
+  "popular_song": "Back in Black",
+  "genre": "Rock",
+  "youngest_member_age": 20
+},
+{
+  "name": "Metallica",
+  "year_formed": 1981,
+  "country": "United States",
+  "popular_song": "Enter Sandman",
+  "genre": "Metal",
+  "youngest_member_age": 22
+},
+{
+  "name": "Nirvana",
+  "year_formed": 1987,
+  "country": "United States",
+  "popular_song": "Smells Like Teen Spirit",
+  "genre": "Grunge",
+  "youngest_member_age": 21
+},
+{
+  "name": "The Doors",
+  "year_formed": 1965,
+  "country": "United States",
+  "popular_song": "Light My Fire",
+  "genre": "Rock",
+  "youngest_member_age": 19
+},
+{
+  "name": "Guns N' Roses",
+  "year_formed": 1985,
+  "country": "United States",
+  "popular_song": "Sweet Child o' Mine",
+  "genre": "Rock",
+  "youngest_member_age": 20
+},
+{
+  "name": "U2",
+  "year_formed": 1976,
+  "country": "Ireland",
+  "popular_song": "With or Without You",
+  "genre": "Rock",
+  "youngest_member_age": 22
+},
+{
+  "name": "ABBA",
+  "year_formed": 1972,
+  "country": "Sweden",
+  "popular_song": "Dancing Queen",
+  "genre": "Pop",
+  "youngest_member_age": 18
+},
+{
+  "name": "The Beach Boys",
+  "year_formed": 1961,
+  "country": "United States",
+  "popular_song": "Good Vibrations",
+  "genre": "Pop",
+  "youngest_member_age": 19
+},
+{
+  "name": "The Who",
+  "year_formed": 1964,
+  "country": "United Kingdom",
+  "popular_song": "Baba O'Riley",
+  "genre": "Rock",
+  "youngest_member_age": 20
+},
+{
+  "name": "Red Hot Chili Peppers",
+  "year_formed": 1982,
+  "country": "United States",
+  "popular_song": "Under the Bridge",
+  "genre": "Rock",
+  "youngest_member_age": 21
+},
+{
+  "name": "The Hardkiss",
+  "year_formed": 2011,
+  "country": "Ukraine",
+  "popular_song": "Korabli",
+  "genre": "Rock",
+  "youngest_member_age": 33
+}]
